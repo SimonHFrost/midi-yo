@@ -1,12 +1,43 @@
 var gulp = require('gulp')
-var Browserify = require('browserify')
-var babelify = require('babelify')
+var sourcemaps = require('gulp-sourcemaps')
+var source = require('vinyl-source-stream')
+var buffer = require('vinyl-buffer')
+var browserify = require('browserify')
+var watchify = require('watchify')
+var babel = require('babelify')
 
-var browserify = Browserify()
-browserify.add('main.js')
+function compile (watch) {
+  var bundler = watchify(
+    browserify('./src/main.js', {
+      debug: true
+    })
+      .transform(babel))
 
-gulp.task('default', function() {
-  browserify.transform(babelify)
-            .bundle()
-            .pipe(process.stdout)
-});
+  function rebundle () {
+    bundler.bundle()
+      .on('error', function (err) {
+        console.error(err)
+        this.emit('end')
+      })
+      .pipe(source('bundle.js'))
+      .pipe(buffer())
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest('./dist'))
+  }
+
+  if (watch) {
+    bundler.on('update', function () {
+      console.log('-> bundling...')
+      rebundle()
+      console.log('-> complete!')
+    })
+  }
+
+  rebundle()
+}
+
+gulp.task('bundle', function () { return compile(false) })
+gulp.task('watch', function () { return compile(true) })
+
+gulp.task('default', ['watch'])
