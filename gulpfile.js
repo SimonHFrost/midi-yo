@@ -27,10 +27,9 @@ function compile (watch) {
   }
 
   if (watch) {
-    bundler.on('update', function () {
-      console.log('-> bundling...')
+    bundler.on('update', function (fileChanged) {
+      console.log(fileChanged + ' changed')
       rebundle()
-      console.log('-> complete!')
     })
   }
 
