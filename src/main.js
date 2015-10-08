@@ -2,48 +2,42 @@ var THREE = require( 'three.js' )
 
 class Scene {
   constructor() {
-    this.message = 'hello world!'
+    this.scene = ''
+    this.camera = ''
+    this.renderer = ''
+    this.geometry = ''
+    this.material = ''
+    this.mesh = ''
   }
 
-  render() {
-    var scene, camera, renderer;
-    var geometry, material, mesh;
+  init() {
+    this.scene = new THREE.Scene();
 
-    init();
-    animate();
+    this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
+    this.camera.position.z = 1000;
 
-    function init() {
+    this.geometry = new THREE.BoxGeometry( 200, 200, 200 );
+    this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
 
-        scene = new THREE.Scene();
+    this.mesh = new THREE.Mesh( this.geometry, this.material );
+    this.scene.add( this.mesh );
 
-        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-        camera.position.z = 1000;
+    this.renderer = new THREE.WebGLRenderer();
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
 
-        geometry = new THREE.BoxGeometry( 200, 200, 200 );
-        material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+    document.body.appendChild( this.renderer.domElement );
+  }
 
-        mesh = new THREE.Mesh( geometry, material );
-        scene.add( mesh );
+  animate() {
+    requestAnimationFrame( this.animate.bind(this) );
 
-        renderer = new THREE.WebGLRenderer();
-        renderer.setSize( window.innerWidth, window.innerHeight );
+    this.mesh.rotation.x += 0.01;
+    this.mesh.rotation.y += 0.02;
 
-        document.body.appendChild( renderer.domElement );
-
-    }
-
-    function animate() {
-
-        requestAnimationFrame( animate );
-
-        mesh.rotation.x += 0.01;
-        mesh.rotation.y += 0.02;
-
-        renderer.render( scene, camera );
-
-    }
+    this.renderer.render( this.scene, this.camera );
   }
 }
 
 var scene = new Scene()
-scene.render()
+scene.init()
+scene.animate()
