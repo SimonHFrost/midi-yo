@@ -5,22 +5,19 @@ class Scene {
     this.scene = ''
     this.camera = ''
     this.renderer = ''
-    this.geometry = ''
-    this.material = ''
     this.mesh = ''
   }
 
   init() {
+    var geometry = new THREE.BoxGeometry( 200, 200, 200 );
+    var material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
+    this.mesh = new THREE.Mesh( geometry, material );
+
     this.scene = new THREE.Scene();
+    this.scene.add( this.mesh );
 
     this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
     this.camera.position.z = 1000;
-
-    this.geometry = new THREE.BoxGeometry( 200, 200, 200 );
-    this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );
-
-    this.mesh = new THREE.Mesh( this.geometry, this.material );
-    this.scene.add( this.mesh );
 
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize( window.innerWidth, window.innerHeight );
