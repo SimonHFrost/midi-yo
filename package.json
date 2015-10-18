@@ -15,6 +15,9 @@
     "watchify": "~3.4.0"
   },
   "devDependencies": {
-    "babelify": "^6.3.0"
+    "babelify": "~6.3.0"
+  },
+  "scripts": {
+    "test": "standard"
   }
 }
