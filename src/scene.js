@@ -2,10 +2,10 @@ var THREE = require('three.js')
 
 class Scene {
   constructor () {
-    this.scene = ''
-    this.camera = ''
-    this.renderer = ''
-    this.mesh = ''
+    this.scene = null
+    this.camera = null
+    this.renderer = null
+    this.mesh = null
   }
 
   init () {
