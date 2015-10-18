@@ -1,6 +1,7 @@
 {
   "name": "midi-yo",
   "version": "0.0.0",
+  "main": "main.js",
   "description": "ES2015 midi, audio, and visualizer app",
   "licence": "MIT",
   "dependencies": {
