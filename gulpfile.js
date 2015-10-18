@@ -10,8 +10,7 @@ function compile (watch) {
   var bundler = watchify(
     browserify('./src/main.js', {
       debug: true
-    })
-      .transform(babel))
+    }).transform(babel))
 
   function rebundle () {
     bundler.bundle()
