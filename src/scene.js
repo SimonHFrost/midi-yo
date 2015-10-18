@@ -16,11 +16,11 @@ class Scene {
     this.scene = new THREE.Scene()
     this.scene.add(this.mesh)
 
-    this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000)
+    this.camera = new THREE.PerspectiveCamera(75, Scene.WIDTH / Scene.HEIGHT, 1, 10000)
     this.camera.position.z = 1000
 
     this.renderer = new THREE.WebGLRenderer()
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
+    this.renderer.setSize(Scene.WIDTH, Scene.HEIGHT)
 
     document.body.appendChild(this.renderer.domElement)
   }
@@ -34,5 +34,8 @@ class Scene {
     this.renderer.render(this.scene, this.camera)
   }
 }
+
+Scene.WIDTH = 400
+Scene.HEIGHT = 300
 
 module.exports = Scene
