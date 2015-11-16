@@ -35,7 +35,7 @@ class Scene {
   }
 }
 
-Scene.WIDTH = 400
-Scene.HEIGHT = 300
+Scene.WIDTH = window.innerWidth
+Scene.HEIGHT = window.innerHeight
 
 module.exports = Scene
