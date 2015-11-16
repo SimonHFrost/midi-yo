@@ -6,6 +6,7 @@ var midi = new Midi()
 
 midi.on( 'recieved', function( data ) {
   console.log( data )
+  scene.createCube(data[0], [1])
 })
 
 midi.sendMidi([1,1])

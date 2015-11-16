@@ -1,23 +1,29 @@
 var THREE = require('three.js')
 
 class Scene {
-  constructor () {
+  constructor() {
     this.scene = null
     this.camera = null
     this.renderer = null
-    this.mesh = null
 
     this._init()
     this._animate()
   }
 
-  _init () {
+  createCube(x, y) {
     var geometry = new THREE.BoxGeometry(200, 200, 200)
+
     var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
     this.mesh = new THREE.Mesh(geometry, material)
 
-    this.scene = new THREE.Scene()
+    this.mesh.position.x = x * 200
+    this.mesh.position.y = y * 200
+
     this.scene.add(this.mesh)
+  }
+
+  _init() {
+    this.scene = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera(75, Scene.WIDTH / Scene.HEIGHT, 1, 10000)
     this.camera.position.z = 1000
@@ -28,11 +34,11 @@ class Scene {
     document.body.appendChild(this.renderer.domElement)
   }
 
-  _animate () {
+  _animate() {
     window.requestAnimationFrame(this._animate.bind(this))
 
-    this.mesh.rotation.x += 0.01
-    this.mesh.rotation.y += 0.02
+    // this.mesh.rotation.x += 0.01
+    // this.mesh.rotation.y += 0.02
 
     this.renderer.render(this.scene, this.camera)
   }
