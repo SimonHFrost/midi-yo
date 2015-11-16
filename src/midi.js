@@ -1,22 +1,30 @@
 var midi = require( 'web-midi' )
 
-var inStream = midi.openInput('Launchpad')
-var outStream = midi.openOutput('Launchpad')
+class Midi {
+  constructor() {
+    this.inStream = null
+    this.outStream = null
 
-inStream.on( 'data', function( data ){
-  console.log( data )
-})
+    this._initStreams()
 
-// Clear
-outStream.write([176,0,0])
+    // Clear launchpad
+    this.outStream.write([176,0,0])
+  }
 
-sendMidi([1,1])
-sendMidi([2,2])
-sendMidi([3,3])
-sendMidi([4,4])
+  sendMidi( position ) {
+    var externalPosition = position[1] * 16 + position[0]
+    console.log( externalPosition )
+    this.outStream.write([144, externalPosition, 60])
+  }
 
-function sendMidi( position ) {
-  var externalPosition = position[1] * 16 + position[0]
-  console.log( externalPosition )
-  outStream.write([144, externalPosition, 60])
+  _initStreams() {
+    this.inStream = midi.openInput('Launchpad')
+    this.outStream = midi.openOutput('Launchpad')
+
+    this.inStream.on( 'data', function( data ){
+      console.log( data )
+    })
+  }
 }
+
+module.exports = Midi
