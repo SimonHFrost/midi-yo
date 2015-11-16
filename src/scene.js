@@ -7,11 +7,11 @@ class Scene {
     this.renderer = null
     this.mesh = null
 
-    this.init()
-    this.animate()
+    this._init()
+    this._animate()
   }
 
-  init () {
+  _init () {
     var geometry = new THREE.BoxGeometry(200, 200, 200)
     var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
     this.mesh = new THREE.Mesh(geometry, material)
@@ -28,7 +28,7 @@ class Scene {
     document.body.appendChild(this.renderer.domElement)
   }
 
-  animate () {
+  _animate () {
     window.requestAnimationFrame(this.animate.bind(this))
 
     this.mesh.rotation.x += 0.01
