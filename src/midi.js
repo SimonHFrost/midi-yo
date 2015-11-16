@@ -1,11 +1,15 @@
+var EventEmitter = require('events').EventEmitter
 var midi = require( 'web-midi' )
 
-class Midi {
+class Midi extends EventEmitter{
   constructor() {
+    super()
+
     this.inStream = null
     this.outStream = null
 
     this._initStreams()
+    this.recieveMidi()
 
     // Clear launchpad
     this.outStream.write([176,0,0])
@@ -17,13 +21,21 @@ class Midi {
     this.outStream.write([144, externalPosition, 60])
   }
 
+  recieveMidi() {
+    var self = this
+
+    this.inStream.on( 'data', function( data ){
+      var number = data[1]
+      var y = Math.floor(number / 16)
+      var x = number - ( y * 16 )
+
+      self.emit( 'recieved', [x,y] )
+    })
+  }
+
   _initStreams() {
     this.inStream = midi.openInput('Launchpad')
     this.outStream = midi.openOutput('Launchpad')
-
-    this.inStream.on( 'data', function( data ){
-      console.log( data )
-    })
   }
 }
 
