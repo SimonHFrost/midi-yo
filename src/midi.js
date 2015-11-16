@@ -1,5 +1,5 @@
 var EventEmitter = require('events').EventEmitter
-var midi = require( 'web-midi' )
+var Midi = require( 'web-midi' )
 
 class Midi extends EventEmitter{
   constructor() {
@@ -34,8 +34,8 @@ class Midi extends EventEmitter{
   }
 
   _initStreams() {
-    this.inStream = midi.openInput('Launchpad')
-    this.outStream = midi.openOutput('Launchpad')
+    this.inStream = Midi.openInput('Launchpad')
+    this.outStream = Midi.openOutput('Launchpad')
   }
 }
 
