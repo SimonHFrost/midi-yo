@@ -6,6 +6,9 @@ class Scene {
     this.camera = null
     this.renderer = null
     this.mesh = null
+
+    this.init()
+    this.animate()
   }
 
   init () {
