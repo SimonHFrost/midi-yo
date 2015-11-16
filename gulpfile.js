@@ -27,7 +27,7 @@ function compile (watch) {
 
   if (watch) {
     bundler.on('update', function (fileChanged) {
-      console.log(fileChanged + ' changed')
+      console.log(new Date().toISOString() + ' ' + fileChanged)
       rebundle()
     })
   }
