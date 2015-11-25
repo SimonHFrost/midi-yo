@@ -14,12 +14,12 @@ class Scene {
     var geometry = new THREE.BoxGeometry(200, 200, 200)
 
     var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
-    this.mesh = new THREE.Mesh(geometry, material)
+    var mesh = new THREE.Mesh(geometry, material)
 
-    this.mesh.position.x = x * 200
-    this.mesh.position.y = y * 200
+    mesh.position.x = x * 200
+    mesh.position.y = y * 200
 
-    this.scene.add(this.mesh)
+    this.scene.add(mesh)
   }
 
   _init() {
@@ -36,10 +36,6 @@ class Scene {
 
   _animate() {
     window.requestAnimationFrame(this._animate.bind(this))
-
-    // this.mesh.rotation.x += 0.01
-    // this.mesh.rotation.y += 0.02
-
     this.renderer.render(this.scene, this.camera)
   }
 }
