@@ -9,7 +9,10 @@ midi.on( 'recieved', function( data ) {
   scene.createCube(data[0], [1])
 })
 
-midi.sendMidi([1,1])
-midi.sendMidi([2,2])
-midi.sendMidi([3,3])
-midi.sendMidi([4,4])
+for ( var i = 0; i < 8; i++ ) {
+  for ( var j = 0; j < 8; j++ ) {
+    midi.sendMidi([i, j])
+  }
+}
+
+setTimeout( function() { midi.clear() }, 1000 )

@@ -11,13 +11,21 @@ class Midi extends EventEmitter{
     this._initStreams()
     this.recieveMidi()
 
-    // Clear launchpad
+    this.clear()
+  }
+
+  clear() {
     this.outStream.write([176,0,0])
   }
 
   sendMidi( position ) {
+    console.log( position )
+
+    if ( position[0] > 7 || position[1] > 7 ) {
+      throw new Error( 'Index is out of range' )
+    }
+
     var externalPosition = position[1] * 16 + position[0]
-    console.log( externalPosition )
     this.outStream.write([144, externalPosition, 60])
   }
 
@@ -34,8 +42,12 @@ class Midi extends EventEmitter{
   }
 
   _initStreams() {
-    this.inStream = WebMidi.openInput('Launchpad')
-    this.outStream = WebMidi.openOutput('Launchpad')
+    try {
+      this.inStream = WebMidi.openInput('Launchpad')
+      this.outStream = WebMidi.openOutput('Launchpad')
+    } catch (err) {
+      throw err.message
+    }
   }
 }
 
