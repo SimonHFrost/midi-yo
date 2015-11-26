@@ -36,8 +36,11 @@ class Midi extends EventEmitter{
       var number = data[1]
       var y = Math.floor(number / 16)
       var x = number - ( y * 16 )
+      var data = [x,y]
 
-      self.emit( 'recieved', [x,y] )
+      self.sendMidi( data )
+
+      self.emit( 'recieved', data )
     })
   }
 
