@@ -33,18 +33,12 @@ class Midi extends EventEmitter{
     var self = this
 
     this.inStream.on( 'data', function( data ){
-      var number = data[1]
-      var y = Math.floor(number / 16)
-      var x = number - ( y * 16 )
-      var data = [x,y]
+      var midiNumber = data[1]
+      var y = Math.floor(midiNumber / 16)
+      var x = midiNumber - ( y * 16 )
+      var coordinates = [x,y]
 
-      self.sendMidi( data )
-
-      setTimeout( function() {
-        self.sendMidi( data, 1 )
-      }, 100)
-
-      self.emit( 'recieved', data )
+      self.emit( 'recieved', coordinates )
     })
   }
 

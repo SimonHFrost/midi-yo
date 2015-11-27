@@ -4,9 +4,16 @@ var Midi = require( './midi.js' )
 var scene = new Scene()
 var midi = new Midi()
 
-midi.on( 'recieved', function( data ) {
+midi.on( 'recieved', function( coordinates ) {
+  midi.sendMidi( coordinates )
+
+  setTimeout( function() {
+    midi.sendMidi( coordinates, 1 )
+  }, 100)
+
   // NOTE: Invert y axis, since launchpad and threejs are opposite
-  scene.createCube(data[0], 7 - data[1])
+  scene.createCube(coordinates[0], 7 - coordinates[1])
+
 })
 
 for ( var i = 0; i < 8; i++ ) {
