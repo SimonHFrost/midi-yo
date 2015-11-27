@@ -5,10 +5,10 @@ var scene = new Scene()
 var midi = new Launchpad()
 
 midi.on( 'recieved', function( coordinates ) {
-  midi.sendMidi( coordinates )
+  midi.send( coordinates )
 
   setTimeout( function() {
-    midi.sendMidi( coordinates, 1 )
+    midi.send( coordinates, 1 )
   }, 100)
 
   // NOTE: Invert y axis, since launchpad and threejs are opposite
@@ -17,7 +17,7 @@ midi.on( 'recieved', function( coordinates ) {
 
 for ( var i = 0; i < 8; i++ ) {
   for ( var j = 0; j < 8; j++ ) {
-    midi.sendMidi([i, j])
+    midi.send([i, j])
   }
 }
 
