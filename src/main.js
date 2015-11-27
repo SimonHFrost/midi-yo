@@ -13,7 +13,6 @@ midi.on( 'recieved', function( coordinates ) {
 
   // NOTE: Invert y axis, since launchpad and threejs are opposite
   scene.createCube(coordinates[0], coordinates[1])
-
 })
 
 for ( var i = 0; i < 8; i++ ) {
