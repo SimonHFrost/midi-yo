@@ -1,8 +1,8 @@
 var Scene = require( './scene.js' )
-var Midi = require( './midi.js' )
+var Launchpad = require( './midi.js' )
 
 var scene = new Scene()
-var midi = new Midi()
+var midi = new Launchpad()
 
 midi.on( 'recieved', function( coordinates ) {
   midi.sendMidi( coordinates )

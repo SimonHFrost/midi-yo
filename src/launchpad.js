@@ -1,7 +1,7 @@
 var EventEmitter = require('events').EventEmitter
 var WebMidi = require( 'web-midi' )
 
-class Midi extends EventEmitter{
+class Launchpad extends EventEmitter{
   constructor() {
     super()
 
@@ -52,4 +52,4 @@ class Midi extends EventEmitter{
   }
 }
 
-module.exports = Midi
+module.exports = Launchpad
