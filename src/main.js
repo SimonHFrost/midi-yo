@@ -1,5 +1,5 @@
 var Scene = require( './scene.js' )
-var Launchpad = require( './midi.js' )
+var Launchpad = require( './launchpad.js' )
 
 var scene = new Scene()
 var midi = new Launchpad()

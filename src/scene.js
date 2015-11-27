@@ -11,13 +11,14 @@ class Scene {
   }
 
   createCube(x, y) {
-    var geometry = new THREE.BoxGeometry(200, 200, 200)
+    var size = Scene.SIZE
+    var geometry = new THREE.BoxGeometry(size, size, size)
 
     var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
     var mesh = new THREE.Mesh(geometry, material)
 
-    mesh.position.x = x * 200 - Scene.OFFSET
-    mesh.position.y = y * 200 - Scene.OFFSET
+    mesh.position.x = x * size - Scene.OFFSET
+    mesh.position.y = y * size - Scene.OFFSET
 
     console.log( mesh.position )
 
@@ -45,5 +46,6 @@ class Scene {
 Scene.WIDTH = window.innerWidth
 Scene.HEIGHT = window.innerHeight
 Scene.OFFSET = 800
+Scene.SIZE = 200
 
 module.exports = Scene
