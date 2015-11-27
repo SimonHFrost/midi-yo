@@ -5,7 +5,8 @@ var scene = new Scene()
 var midi = new Midi()
 
 midi.on( 'recieved', function( data ) {
-  scene.createCube(data[0], [1])
+  // NOTE: Invert y axis, since launchpad and threejs are opposite
+  scene.createCube(data[0], 7 - data[1])
 })
 
 for ( var i = 0; i < 8; i++ ) {

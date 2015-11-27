@@ -16,8 +16,10 @@ class Scene {
     var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
     var mesh = new THREE.Mesh(geometry, material)
 
-    mesh.position.x = x * 200
-    mesh.position.y = y * 200
+    mesh.position.x = x * 200 - Scene.OFFSET
+    mesh.position.y = y * 200 - Scene.OFFSET
+
+    console.log( mesh.position )
 
     this.scene.add(mesh)
   }
@@ -42,5 +44,6 @@ class Scene {
 
 Scene.WIDTH = window.innerWidth
 Scene.HEIGHT = window.innerHeight
+Scene.OFFSET = 800
 
 module.exports = Scene

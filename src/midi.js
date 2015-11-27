@@ -19,13 +19,11 @@ class Midi extends EventEmitter{
   }
 
   sendMidi( position, value ) {
-    console.log( position, value )
-
-    var value = !!value ? value : 60
-
     if ( position[0] > 7 || position[1] > 7 ) {
       throw new Error( 'Index is out of range' )
     }
+
+    var value = !!value ? value : 60
 
     var externalPosition = position[1] * 16 + position[0]
     this.outStream.write([144, externalPosition, value])
@@ -44,7 +42,7 @@ class Midi extends EventEmitter{
 
       setTimeout( function() {
         self.sendMidi( data, 1 )
-      }, 500)
+      }, 100)
 
       self.emit( 'recieved', data )
     })
