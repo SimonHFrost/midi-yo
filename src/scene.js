@@ -11,6 +11,8 @@ class Scene {
   }
 
   createCube(x, y) {
+    y = 7 - y
+
     var size = Scene.SIZE
     var geometry = new THREE.BoxGeometry(size, size, size)
 
