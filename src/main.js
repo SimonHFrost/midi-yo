@@ -11,7 +11,6 @@ launchpad.on('recieved', function (coordinates) {
     launchpad.send(coordinates, 1)
   }, 100)
 
-  // NOTE: Invert y axis, since launchpad and threejs are opposite
   scene.createCube(coordinates[0], coordinates[1])
 })
 
