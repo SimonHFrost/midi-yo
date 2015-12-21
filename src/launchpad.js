@@ -1,8 +1,8 @@
 var EventEmitter = require('events').EventEmitter
-var WebMidi = require( 'web-midi' )
+var WebMidi = require('web-midi')
 
-class Launchpad extends EventEmitter{
-  constructor() {
+class Launchpad extends EventEmitter {
+  constructor () {
     super()
 
     this.inStream = null
@@ -14,35 +14,34 @@ class Launchpad extends EventEmitter{
     this.clear()
   }
 
-  clear() {
-    this.outStream.write([176,0,0])
+  clear () {
+    this.outStream.write([176, 0, 0])
   }
 
-  send( position, value ) {
-    if ( position[0] > 7 || position[1] > 7 ) {
-      throw new Error( 'Index is out of range' )
+  send (position, value) {
+    if (position[0] > 7 || position[1] > 7) {
+      throw new Error('Index is out of range')
     }
 
-    var value = !!value ? value : 60
-
+    var newValue = value || 60
     var externalPosition = position[1] * 16 + position[0]
-    this.outStream.write([144, externalPosition, value])
+    this.outStream.write([144, externalPosition, newValue])
   }
 
-  recieve() {
+  recieve () {
     var self = this
 
-    this.inStream.on( 'data', function( data ){
+    this.inStream.on('data', function (data) {
       var midiNumber = data[1]
       var y = Math.floor(midiNumber / 16)
-      var x = midiNumber - ( y * 16 )
-      var coordinates = [x,y]
+      var x = midiNumber - (y * 16)
+      var coordinates = [x, y]
 
-      self.emit( 'recieved', coordinates )
+      self.emit('recieved', coordinates)
     })
   }
 
-  _initStreams() {
+  _initStreams () {
     try {
       this.inStream = WebMidi.openInput('Launchpad')
       this.outStream = WebMidi.openOutput('Launchpad')

@@ -1,7 +1,7 @@
 var THREE = require('three.js')
 
 class Scene {
-  constructor() {
+  constructor () {
     this.scene = null
     this.camera = null
     this.renderer = null
@@ -10,7 +10,7 @@ class Scene {
     this._animate()
   }
 
-  createCube(x, y) {
+  createCube (x, y) {
     y = 7 - y
 
     var size = Scene.SIZE
@@ -22,12 +22,12 @@ class Scene {
     mesh.position.x = x * size - Scene.OFFSET
     mesh.position.y = y * size - Scene.OFFSET
 
-    console.log( mesh.position )
+    console.log(mesh.position)
 
     this.scene.add(mesh)
   }
 
-  _init() {
+  _init () {
     this.scene = new THREE.Scene()
 
     this.camera = new THREE.PerspectiveCamera(75, Scene.WIDTH / Scene.HEIGHT, 1, 10000)
@@ -39,7 +39,7 @@ class Scene {
     document.body.appendChild(this.renderer.domElement)
   }
 
-  _animate() {
+  _animate () {
     window.requestAnimationFrame(this._animate.bind(this))
     this.renderer.render(this.scene, this.camera)
   }
