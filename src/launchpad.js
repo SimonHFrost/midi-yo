@@ -9,7 +9,7 @@ class Launchpad extends EventEmitter {
     this.outStream = null
 
     this._initStreams()
-    this.recieve()
+    this.bindEvents()
 
     this.clear()
   }
@@ -18,7 +18,7 @@ class Launchpad extends EventEmitter {
     this.outStream.write([176, 0, 0])
   }
 
-  send (position, value) {
+  output (position, value) {
     if (position[0] > 7 || position[1] > 7) {
       throw new Error('Index is out of range')
     }
@@ -28,7 +28,7 @@ class Launchpad extends EventEmitter {
     this.outStream.write([144, externalPosition, newValue])
   }
 
-  recieve () {
+  bindEvents () {
     var self = this
 
     this.inStream.on('data', function (data) {
