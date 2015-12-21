@@ -1,12 +1,12 @@
 var Scene = require('./scene.js')
 var Launchpad = require('./launchpad.js')
 
-if ( location.search.match( 'debug=true' ) ) {
+if (window.location.search.match('debug=true')) {
   console.log('DEBUG MODE ENABLED')
   window.debug = true
 }
 
-var scene = new Scene()
+// var scene = new Scene()
 var launchpad = new Launchpad()
 
 launchpad.on('recieved', function (coordinates) {
@@ -16,7 +16,7 @@ launchpad.on('recieved', function (coordinates) {
     launchpad.output(coordinates, 1)
   }, 100)
 
-  scene.createCube(coordinates[0], coordinates[1])
+  // scene.createCube(coordinates[0], coordinates[1])
 })
 
 for (var i = 0; i < 8; i++) {
@@ -26,3 +26,13 @@ for (var i = 0; i < 8; i++) {
 }
 
 setTimeout(function () { launchpad.clear() }, 1000)
+
+var two = new window.Two({
+  fullscreen: true,
+  autostart: true
+}).appendTo(document.body)
+
+var rect = two.makeRectangle(two.width / 2, two.height / 2, 50, 50)
+two.bind('update', function () {
+  rect.rotation += 0.001
+})
