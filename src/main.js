@@ -2,13 +2,13 @@ var Scene = require('./scene.js')
 var Launchpad = require('./launchpad.js')
 
 var scene = new Scene()
-var midi = new Launchpad()
+var launchpad = new Launchpad()
 
-midi.on('recieved', function (coordinates) {
-  midi.send(coordinates)
+launchpad.on('recieved', function (coordinates) {
+  launchpad.send(coordinates)
 
   setTimeout(function () {
-    midi.send(coordinates, 1)
+    launchpad.send(coordinates, 1)
   }, 100)
 
   // NOTE: Invert y axis, since launchpad and threejs are opposite
@@ -17,8 +17,8 @@ midi.on('recieved', function (coordinates) {
 
 for (var i = 0; i < 8; i++) {
   for (var j = 0; j < 8; j++) {
-    midi.send([i, j])
+    launchpad.send([i, j])
   }
 }
 
-setTimeout(function () { midi.clear() }, 1000)
+setTimeout(function () { launchpad.clear() }, 1000)
