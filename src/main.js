@@ -1,38 +1,47 @@
 var Scene = require('./scene.js')
+var FlatScene = require('./flat-scene.js')
 var Launchpad = require('./launchpad.js')
 
-if (window.location.search.match('debug=true')) {
-  console.log('DEBUG MODE ENABLED')
-  window.debug = true
-}
+class Main {
+  constructor () {
+    if (window.location.search.match('debug=true')) {
+      console.log('DEBUG MODE ENABLED')
+      window.debug = true
+    }
 
-var scene = new Scene()
-var launchpad = new Launchpad()
+    this.scene = new Scene()
+    this.flatScene = new FlatScene()
+    this.launchpad = new Launchpad()
 
-launchpad.on('recieved', function (coordinates) {
-  launchpad.output(coordinates)
+    this.bindEvents()
+    this.initLights()
+  }
 
-  setTimeout(function () {
-    launchpad.output(coordinates, 1)
-  }, 100)
+  bindEvents () {
+    var self = this
 
-  scene.createCube(coordinates[0], coordinates[1])
-})
+    this.launchpad.on('recieved', function (coordinates) {
+      self.launchpad.output(coordinates)
 
-for (var i = 0; i < 8; i++) {
-  for (var j = 0; j < 8; j++) {
-    launchpad.output([i, j])
+      setTimeout(function () {
+        self.launchpad.output(coordinates, 1)
+      }, 100)
+
+      self.scene.createCube(coordinates[0], coordinates[1])
+    })
+  }
+
+  initLights () {
+    var self = this
+
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        this.launchpad.output([i, j])
+      }
+    }
+
+    setTimeout(function () { self.launchpad.clear() }, 1000)
   }
 }
 
-setTimeout(function () { launchpad.clear() }, 1000)
-
-var two = new window.Two({
-  fullscreen: true,
-  autostart: true
-}).appendTo(document.body)
-
-var rect = two.makeRectangle(two.width / 2, two.height / 2, 50, 50)
-two.bind('update', function () {
-  rect.rotation += 0.001
-})
+var main = new Main()

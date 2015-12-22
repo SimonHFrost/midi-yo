@@ -2,10 +2,6 @@ var THREE = require('three.js')
 
 class Scene {
   constructor () {
-    this.scene = null
-    this.camera = null
-    this.renderer = null
-
     this._init()
     this._animate()
   }
@@ -36,6 +32,7 @@ class Scene {
     this.renderer = new THREE.WebGLRenderer()
     this.renderer.setSize(Scene.WIDTH, Scene.HEIGHT)
 
+    this.renderer.domElement.classList.add('three-renderer')
     document.body.appendChild(this.renderer.domElement)
   }
 
