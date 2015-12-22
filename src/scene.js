@@ -26,8 +26,18 @@ class Scene {
 
   bindEvents () {
     window.addEventListener('keypress', (event) => {
-      if (String.fromCharCode(event.which) === '2') {
+      var key = String.fromCharCode(event.which)
+
+      if (key === '2') {
         this.domElement.classList.toggle('hide')
+      }
+
+      if (key === 'a') {
+        this.camera.rotation.y -= 0.01
+      }
+
+      if (key === 'd') {
+        this.camera.rotation.y += 0.01
       }
     })
   }
