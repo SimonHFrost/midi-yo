@@ -6,7 +6,7 @@ if (window.location.search.match('debug=true')) {
   window.debug = true
 }
 
-// var scene = new Scene()
+var scene = new Scene()
 var launchpad = new Launchpad()
 
 launchpad.on('recieved', function (coordinates) {
@@ -16,7 +16,7 @@ launchpad.on('recieved', function (coordinates) {
     launchpad.output(coordinates, 1)
   }, 100)
 
-  // scene.createCube(coordinates[0], coordinates[1])
+  scene.createCube(coordinates[0], coordinates[1])
 })
 
 for (var i = 0; i < 8; i++) {
