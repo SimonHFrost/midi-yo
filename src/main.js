@@ -18,29 +18,25 @@ class Main {
   }
 
   bindEvents () {
-    var self = this
+    this.launchpad.on('recieved', (coordinates) => {
+      this.launchpad.output(coordinates)
 
-    this.launchpad.on('recieved', function (coordinates) {
-      self.launchpad.output(coordinates)
-
-      setTimeout(function () {
-        self.launchpad.output(coordinates, 1)
+      setTimeout(() => {
+        this.launchpad.output(coordinates, 1)
       }, 100)
 
-      self.scene.createCube(coordinates[0], coordinates[1])
+      this.scene.createCube(coordinates[0], coordinates[1])
     })
   }
 
   initLights () {
-    var self = this
-
     for (var i = 0; i < 8; i++) {
       for (var j = 0; j < 8; j++) {
         this.launchpad.output([i, j])
       }
     }
 
-    setTimeout(function () { self.launchpad.clear() }, 1000)
+    setTimeout(() => { this.launchpad.clear() }, 1000)
   }
 }
 

@@ -29,16 +29,14 @@ class Launchpad extends EventEmitter {
   }
 
   bindEvents () {
-    var self = this
-
-    this.inStream.on('data', function (data) {
+    this.inStream.on('data', (data) => {
       var midiNumber = data[1]
       var y = Math.floor(midiNumber / 16)
       // NOTE: Invert y axis, since launchpad and threejs are opposite
       var x = midiNumber - (y * 16)
       var coordinates = [x, y]
 
-      self.emit('recieved', coordinates)
+      this.emit('recieved', coordinates)
     })
   }
 
