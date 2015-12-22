@@ -2,6 +2,7 @@ var THREE = require('three.js')
 
 class Scene {
   constructor () {
+    this.bindEvents()
     this._init()
     this._animate()
   }
@@ -23,6 +24,14 @@ class Scene {
     this.scene.add(mesh)
   }
 
+  bindEvents () {
+    window.addEventListener('keypress', (event) => {
+      if (String.fromCharCode(event.which) === '2') {
+        this.domElement.classList.toggle('hide')
+      }
+    })
+  }
+
   _init () {
     this.scene = new THREE.Scene()
 
@@ -32,7 +41,9 @@ class Scene {
     this.renderer = new THREE.WebGLRenderer()
     this.renderer.setSize(Scene.WIDTH, Scene.HEIGHT)
 
-    this.renderer.domElement.classList.add('three-renderer')
+    this.domElement = this.renderer.domElement
+    this.domElement.classList.add('three-renderer')
+
     document.body.appendChild(this.renderer.domElement)
   }
 
