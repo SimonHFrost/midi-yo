@@ -4,6 +4,7 @@
   "main": "src/electron.js",
   "description": "ES2015 midi, audio, and visualizer app",
   "licence": "MIT",
+  "repository": "https://github.com/SimonHFrost/midi-yo",
   "dependencies": {
     "browserify": "~11.2.0",
     "gulp": "~3.9.0",
