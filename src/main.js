@@ -14,7 +14,7 @@ class Main {
     this.launchpad = new Launchpad()
 
     this.bindEvents()
-    this.initLights()
+    this._initLights()
   }
 
   bindEvents () {
@@ -29,7 +29,7 @@ class Main {
     })
   }
 
-  initLights () {
+  _initLights () {
     for (var i = 0; i < 8; i++) {
       for (var j = 0; j < 8; j++) {
         this.launchpad.output([i, j])
