@@ -44,8 +44,8 @@ class Launchpad extends EventEmitter {
     try {
       this.inStream = WebMidi.openInput('Launchpad')
       this.outStream = WebMidi.openOutput('Launchpad')
-    } catch (err) {
-      throw err.message
+    } catch (error) {
+      window.alert('No launchpad found')
     }
   }
 }
