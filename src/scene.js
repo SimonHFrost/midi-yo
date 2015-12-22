@@ -48,6 +48,8 @@ class Scene {
     this.camera = new THREE.PerspectiveCamera(75, Scene.WIDTH / Scene.HEIGHT, 1, 10000)
     this.camera.position.z = 2000
 
+    this.clock = new THREE.Clock()
+
     this.renderer = new THREE.WebGLRenderer()
     this.renderer.setSize(Scene.WIDTH, Scene.HEIGHT)
 
@@ -58,6 +60,8 @@ class Scene {
   }
 
   _animate () {
+    // Can use clock delta here
+    // this.clock.getDelta()
     window.requestAnimationFrame(this._animate.bind(this))
     this.renderer.render(this.scene, this.camera)
   }
