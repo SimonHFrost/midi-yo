@@ -37,8 +37,6 @@ class Launchpad extends EventEmitter {
       var midiNumber = data[1]
       var scaled = (midiNumber - 36)
 
-      // WIP, need to invert grid
-
       var y = Math.floor(scaled / 4)
       var x = scaled - (y * 4)
       var coordinates = [x, y]
@@ -47,6 +45,9 @@ class Launchpad extends EventEmitter {
         coordinates[1] = coordinates[1] - 7
         coordinates[0] = coordinates[0] + 3
       }
+
+      // Invert coordinates
+      coordinates[1] = 7 - coordinates[1]
 
       console.log(coordinates)
 
