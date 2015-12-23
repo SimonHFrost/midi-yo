@@ -20,7 +20,7 @@ class Launchpad extends EventEmitter {
 
   output (position, value) {
     if (position[0] > 7 || position[1] > 7) {
-      throw new Error('Index is out of range')
+      return // Fail graciously, the world is bigger than you are
     }
 
     var newValue = value || 0
@@ -35,10 +35,27 @@ class Launchpad extends EventEmitter {
       }
 
       var midiNumber = data[1]
-      var y = Math.floor(midiNumber / 16)
-      // NOTE: Invert y axis, since launchpad and threejs are opposite
-      var x = midiNumber - (y * 16)
+      var scaled = (midiNumber - 36)
+
+      // WIP, need to invert grid
+
+      var y = Math.floor(scaled / 4)
+      var x = scaled - (y * 4)
       var coordinates = [x, y]
+
+      if (coordinates[1] > 7) {
+        coordinates[1] = coordinates[1] - 7
+        coordinates[0] = coordinates[0] + 3
+      }
+
+      console.log(coordinates)
+
+      // The following is normal mode of launchpad
+
+      // var y = Math.floor(midiNumber / 16)
+      // NOTE: Invert y axis, since launchpad and threejs are opposite
+      // var x = midiNumber - (y * 16)
+      // var coordinates = [x, y]
 
       this.emit('recieved', coordinates)
     })
