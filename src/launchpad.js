@@ -23,13 +23,17 @@ class Launchpad extends EventEmitter {
       throw new Error('Index is out of range')
     }
 
-    var newValue = value || 60
+    var newValue = value || 0
     var externalPosition = position[1] * 16 + position[0]
     this.outStream.write([144, externalPosition, newValue])
   }
 
   bindEvents () {
     this.inStream.on('data', (data) => {
+      if (data[2] === 0) { // Ignore the off signal
+        return
+      }
+
       var midiNumber = data[1]
       var y = Math.floor(midiNumber / 16)
       // NOTE: Invert y axis, since launchpad and threejs are opposite

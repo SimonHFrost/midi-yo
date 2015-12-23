@@ -13,15 +13,14 @@ class Scene {
     var size = Scene.SIZE
     var geometry = new THREE.BoxGeometry(size, size, size)
 
-    var material = new THREE.MeshBasicMaterial({ color: 0xff0000, wireframe: true })
+    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
     var mesh = new THREE.Mesh(geometry, material)
 
     mesh.position.x = x * size - Scene.OFFSET
     mesh.position.y = y * size - Scene.OFFSET
 
-    console.log(mesh.position)
-
     this.scene.add(mesh)
+    return mesh
   }
 
   bindEvents () {
