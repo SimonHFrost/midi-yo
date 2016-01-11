@@ -42,8 +42,8 @@ class Launchpad extends EventEmitter {
       var coordinates = [x, y]
 
       if (coordinates[1] > 7) {
-        coordinates[1] = coordinates[1] - 7
-        coordinates[0] = coordinates[0] + 3
+        coordinates[0] = coordinates[0] + 4
+        coordinates[1] = coordinates[1] - 8
       }
 
       // Invert coordinates
