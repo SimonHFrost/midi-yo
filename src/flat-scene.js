@@ -13,8 +13,13 @@ class FlatScene {
   }
 
   createSquare (x, y) {
-    this.two.makeRectangle(x * 100 + 100, y * 100 + 100, 50, 50)
+    var square = this.two.makeRectangle(x * 100 + 100, y * 100 + 100, 50, 50)
     this.two.update()
+    return square
+  }
+
+  removeSquare (square) {
+    this.two.remove(square)
   }
 
   _init () {

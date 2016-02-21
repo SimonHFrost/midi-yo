@@ -21,11 +21,12 @@ class Main {
     this.launchpad.on('recieved', (coordinates) => {
       this.launchpad.output(coordinates, 60)
       let cube = this.scene.createCube(coordinates[0], coordinates[1])
-      this.flatScene.createSquare(coordinates[0], coordinates[1])
+      let square = this.flatScene.createSquare(coordinates[0], coordinates[1])
 
       setTimeout(() => {
         this.launchpad.output(coordinates)
         this.scene.removeCube(cube)
+        this.flatScene.removeSquare(square)
       }, 100)
     })
   }
