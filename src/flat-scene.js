@@ -23,6 +23,7 @@ class FlatScene {
   }
 
   _init () {
+    // TODO: Look at using 'two.clean.js' https://github.com/jonobr1/two.js/issues/43
     this.two = new window.Two({
       fullscreen: true,
       autostart: true
