@@ -13,7 +13,7 @@ class FlatScene {
   }
 
   createSquare (x, y) {
-    this.two.makeCircle(x * 100 + 100, y * 100 + 100, 50)
+    this.two.makeRectangle(x * 100 + 100, y * 100 + 100, 50, 50)
     this.two.update()
   }
 
