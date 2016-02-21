@@ -20,7 +20,7 @@ class Launchpad extends EventEmitter {
 
   output (position, value) {
     if (position[0] > 7 || position[1] > 7) {
-      return // Fail graciously, the world is bigger than you are
+      return // Fail graciously if out of bounds
     }
 
     var newValue = value || 0
