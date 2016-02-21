@@ -25,7 +25,7 @@ class Main {
 
       setTimeout(() => {
         this.launchpad.output(coordinates)
-        this.scene.scene.remove(cube)
+        this.scene.removeCube(cube)
       }, 100)
     })
   }

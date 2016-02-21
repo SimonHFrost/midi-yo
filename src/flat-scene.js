@@ -1,19 +1,7 @@
 class FlatScene {
   constructor () {
-    this.two = new window.Two({
-      fullscreen: true,
-      autostart: true
-    }).appendTo(document.body)
-
     this.bindEvents()
-
-    this.domElement = this.two.renderer.domElement
-    this.domElement.classList.add('two-renderer')
-
-    var rect = this.two.makeRectangle(this.two.width / 2, this.two.height / 2, 50, 50)
-    this.two.bind('update', function () {
-      rect.rotation += 0.001
-    })
+    this._init()
   }
 
   bindEvents () {
@@ -27,6 +15,16 @@ class FlatScene {
   createSquare (x, y) {
     this.two.makeCircle(x * 100 + 100, y * 100 + 100, 50)
     this.two.update()
+  }
+
+  _init () {
+    this.two = new window.Two({
+      fullscreen: true,
+      autostart: true
+    }).appendTo(document.body)
+
+    this.domElement = this.two.renderer.domElement
+    this.domElement.classList.add('two-renderer')
   }
 }
 

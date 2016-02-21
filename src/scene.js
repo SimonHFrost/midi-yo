@@ -23,6 +23,10 @@ class Scene {
     return mesh
   }
 
+  removeCube (cube) {
+    this.scene.remove(cube)
+  }
+
   bindEvents () {
     window.addEventListener('keypress', (event) => {
       var key = String.fromCharCode(event.which)
