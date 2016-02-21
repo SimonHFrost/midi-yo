@@ -1,5 +1,5 @@
-var EventEmitter = require('events').EventEmitter
-var WebMidi = require('web-midi')
+let EventEmitter = require('events').EventEmitter
+let WebMidi = require('web-midi')
 
 class Launchpad extends EventEmitter {
   constructor () {
@@ -23,8 +23,8 @@ class Launchpad extends EventEmitter {
       return // Fail graciously if out of bounds
     }
 
-    var newValue = value || 0
-    var externalPosition = position[1] * 16 + position[0]
+    let newValue = value || 0
+    let externalPosition = position[1] * 16 + position[0]
     this.outStream.write([144, externalPosition, newValue])
   }
 
@@ -34,12 +34,12 @@ class Launchpad extends EventEmitter {
         return
       }
 
-      var midiNumber = data[1]
-      var scaled = (midiNumber - 36)
+      let midiNumber = data[1]
+      let scaled = (midiNumber - 36)
 
-      var y = Math.floor(scaled / 4)
-      var x = scaled - (y * 4)
-      var coordinates = [x, y]
+      let y = Math.floor(scaled / 4)
+      let x = scaled - (y * 4)
+      let coordinates = [x, y]
 
       if (coordinates[1] > 7) {
         coordinates[0] = coordinates[0] + 4
@@ -53,10 +53,10 @@ class Launchpad extends EventEmitter {
 
       // The following is normal mode of launchpad
 
-      // var y = Math.floor(midiNumber / 16)
+      // let y = Math.floor(midiNumber / 16)
       // NOTE: Invert y axis, since launchpad and threejs are opposite
-      // var x = midiNumber - (y * 16)
-      // var coordinates = [x, y]
+      // let x = midiNumber - (y * 16)
+      // let coordinates = [x, y]
 
       this.emit('recieved', coordinates)
     })

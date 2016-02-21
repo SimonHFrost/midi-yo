@@ -1,6 +1,6 @@
-var Scene = require('./scene.js')
-var FlatScene = require('./flat-scene.js')
-var Launchpad = require('./launchpad.js')
+let Scene = require('./scene.js')
+let FlatScene = require('./flat-scene.js')
+let Launchpad = require('./launchpad.js')
 
 class Main {
   constructor () {
@@ -20,7 +20,7 @@ class Main {
   bindEvents () {
     this.launchpad.on('recieved', (coordinates) => {
       this.launchpad.output(coordinates, 60)
-      var cube = this.scene.createCube(coordinates[0], coordinates[1])
+      let cube = this.scene.createCube(coordinates[0], coordinates[1])
       this.flatScene.createSquare(coordinates[0], coordinates[1])
 
       setTimeout(() => {
@@ -31,8 +31,8 @@ class Main {
   }
 
   _initLights () {
-    for (var i = 0; i < 8; i++) {
-      for (var j = 0; j < 8; j++) {
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
         this.launchpad.output([i, j])
       }
     }
@@ -42,4 +42,4 @@ class Main {
 }
 
 /*eslint-disable*/
-var main = new Main()
+let main = new Main()

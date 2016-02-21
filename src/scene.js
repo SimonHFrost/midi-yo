@@ -1,4 +1,4 @@
-var THREE = require('three.js')
+let THREE = require('three.js')
 
 class Scene {
   constructor () {
@@ -10,11 +10,11 @@ class Scene {
   createCube (x, y) {
     y = 7 - y
 
-    var size = Scene.SIZE
-    var geometry = new THREE.BoxGeometry(size, size, size)
+    let size = Scene.SIZE
+    let geometry = new THREE.BoxGeometry(size, size, size)
 
-    var material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
-    var mesh = new THREE.Mesh(geometry, material)
+    let material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
+    let mesh = new THREE.Mesh(geometry, material)
 
     mesh.position.x = x * size - Scene.OFFSET
     mesh.position.y = y * size - Scene.OFFSET
@@ -29,7 +29,7 @@ class Scene {
 
   bindEvents () {
     window.addEventListener('keypress', (event) => {
-      var key = String.fromCharCode(event.which)
+      let key = String.fromCharCode(event.which)
 
       if (key === '2') {
         this.domElement.classList.toggle('hide')
