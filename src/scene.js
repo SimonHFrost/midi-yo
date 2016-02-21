@@ -55,7 +55,7 @@ class Scene {
     this.domElement = this.renderer.domElement
     this.domElement.classList.add('three-renderer')
 
-    document.body.appendChild(this.renderer.domElement)
+    document.body.appendChild(this.domElement)
   }
 
   _animate () {

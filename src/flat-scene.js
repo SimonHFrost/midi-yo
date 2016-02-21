@@ -24,8 +24,8 @@ class FlatScene {
     })
   }
 
-  createSquare(x, y) {
-    var circle = this.two.makeCircle(x * 100 + 100, y * 100 + 100, 50);
+  createSquare (x, y) {
+    this.two.makeCircle(x * 100 + 100, y * 100 + 100, 50)
     this.two.update()
   }
 }

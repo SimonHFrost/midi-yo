@@ -5,7 +5,7 @@ var Launchpad = require('./launchpad.js')
 class Main {
   constructor () {
     if (window.location.search.match('debug=true')) {
-      console.log('DEBUG MODE ENABLED')
+      console.log('DEBUG MODE')
       window.debug = true
     }
 
