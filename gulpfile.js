@@ -27,7 +27,7 @@ function compile (watch) {
 
   if (watch) {
     bundler.on('update', function (fileChanged) {
-      console.log(new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds() + ' Changed: ' + fileChanged)
+      console.log(new Date().toUTCString() + ' Changed: ' + fileChanged)
       rebundle()
     })
   }
