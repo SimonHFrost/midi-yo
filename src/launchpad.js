@@ -8,10 +8,10 @@ class Launchpad extends EventEmitter {
     this.inStream = null
     this.outStream = null
 
-    this._initStreams()
-    this.bindEvents()
+    // this._initStreams()
+    // this.bindEvents()
 
-    this.clear()
+    // this.clear()
   }
 
   clear () {
