@@ -24,7 +24,7 @@ class Main {
       setTimeout(() => {
         this.scene.removeCube(cube)
         this.flatScene.removeSquare(square)
-      }, 100)
+      }, 1000)
     })
   }
 

@@ -41,7 +41,7 @@ class Launchpad extends EventEmitter {
       }
     }
 
-    var noteMatrix = this.launchpad.createNoteMatrix(mapping, colors.amber)
+    var noteMatrix = this.launchpad.createNoteMatrix(mapping, colors.green)
     noteMatrix.on('data', (midiNote) => {
       if (midiNote[2]) {
         this.noteOn(midiNote[1])
