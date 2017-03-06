@@ -27,7 +27,7 @@ class Launchpad extends EventEmitter {
   }
 
   bindEvents () {
-      // map launchpad grid to chromatic midi notes (starting at 30)
+    // map launchpad grid to chromatic midi notes (starting at 30)
     var mapping = []
     var offset = 30
     for (var y = 0; y < 8; y++) {
@@ -42,28 +42,25 @@ class Launchpad extends EventEmitter {
 
     var noteMatrix = this.launchpad.createNoteMatrix(mapping, colors.amber)
     noteMatrix.on('data', function (midiNote) {
-      if (midiNote[2]) { // note on
+      if (midiNote[2]) {
         noteOn(midiNote[1])
-      } else { // note off
+      } else {
         noteOff(midiNote[1])
       }
     })
 
     noteMatrix.pipe(noteMatrix) // echo the notes back to light up buttons
 
-    // TODO Fix this hack
-    var that = this
-
     // screen synth
     var onNotes = {}
-    function noteOn (note) {
-      onNotes[note] = setInterval(function () {
+    let noteOn = (note) => {
+      onNotes[note] = setInterval(() => {
         console.log(note)
-        that.emit('recieved', [5, note % 5])
+        this.emit('recieved', [5, note % 5])
       }, 50)
     }
 
-    function noteOff (note) {
+    let noteOff = (note) => {
       if (onNotes[note]) {
         clearInterval(onNotes[note])
         onNotes[note] = null
