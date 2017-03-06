@@ -16,8 +16,9 @@ class Launchpad extends EventEmitter {
 
     this.duplexStream = new MidiStream('Launchpad')
     this.launchpad = new MidiController(this.duplexStream)
+    this.onNotes = {}
 
-    this.bindEvents()
+    this.createNoteMatrix();
 
     this.clear()
   }
@@ -26,7 +27,7 @@ class Launchpad extends EventEmitter {
     this.duplexStream.write([176, 0, 0])
   }
 
-  bindEvents () {
+  createNoteMatrix () {
     // map launchpad grid to chromatic midi notes (starting at 30)
     var mapping = []
     var offset = 30
@@ -41,30 +42,28 @@ class Launchpad extends EventEmitter {
     }
 
     var noteMatrix = this.launchpad.createNoteMatrix(mapping, colors.amber)
-    noteMatrix.on('data', function (midiNote) {
+    noteMatrix.on('data', (midiNote) => {
       if (midiNote[2]) {
-        noteOn(midiNote[1])
+        this.noteOn(midiNote[1])
       } else {
-        noteOff(midiNote[1])
+        this.noteOff(midiNote[1])
       }
     })
 
     noteMatrix.pipe(noteMatrix) // echo the notes back to light up buttons
+  }
 
-    // screen synth
-    var onNotes = {}
-    let noteOn = (note) => {
-      onNotes[note] = setInterval(() => {
-        console.log(note)
-        this.emit('recieved', [5, note % 5])
-      }, 50)
-    }
+  noteOn (note) {
+    this.onNotes[note] = setInterval(() => {
+      console.log(note)
+      this.emit('recieved', [0, note % 5])
+    }, 50)
+  }
 
-    let noteOff = (note) => {
-      if (onNotes[note]) {
-        clearInterval(onNotes[note])
-        onNotes[note] = null
-      }
+  noteOff (note) {
+    if (this.onNotes[note]) {
+      clearInterval(this.onNotes[note])
+      this.onNotes[note] = null
     }
   }
 }
