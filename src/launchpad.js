@@ -3,9 +3,6 @@ let EventEmitter = require('events').EventEmitter
 var MidiStream = require('midi-stream')
 var MidiController = require('midi-controller')
 
-var duplexStream = MidiStream('Launchpad')
-var launchpad = MidiController(duplexStream)
-
 var colors = {
   green: 60,
   red: 13,
@@ -17,13 +14,16 @@ class Launchpad extends EventEmitter {
   constructor () {
     super()
 
+    this.duplexStream = new MidiStream('Launchpad')
+    this.launchpad = new MidiController(this.duplexStream)
+
     this.bindEvents()
 
     this.clear()
   }
 
   clear () {
-    duplexStream.write([176, 0, 0])
+    this.duplexStream.write([176, 0, 0])
   }
 
   bindEvents () {
@@ -40,7 +40,7 @@ class Launchpad extends EventEmitter {
       }
     }
 
-    var noteMatrix = launchpad.createNoteMatrix(mapping, colors.amber)
+    var noteMatrix = this.launchpad.createNoteMatrix(mapping, colors.amber)
     noteMatrix.on('data', function (midiNote) {
       if (midiNote[2]) { // note on
         noteOn(midiNote[1])

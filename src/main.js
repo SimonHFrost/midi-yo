@@ -14,7 +14,6 @@ class Main {
     this.launchpad = new Launchpad()
 
     this.bindEvents()
-    this.launchpad.clear()
   }
 
   bindEvents () {
