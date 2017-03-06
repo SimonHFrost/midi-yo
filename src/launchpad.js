@@ -28,15 +28,15 @@ class Launchpad extends EventEmitter {
   }
 
   createNoteMatrix () {
-    // map launchpad grid to chromatic midi notes (starting at 30)
+    // see 'midi-controller' readme for getting chromatic note
     var mapping = []
-    var offset = 30
+    var counter = 0
     for (var y = 0; y < 8; y++) {
       for (var x = 0; x < 8; x++) {
         var id = (y * 16) + x
         mapping.push([
           [144, id],       // input midi message
-          [144, offset++]  // output midi message
+          [144, counter++]  // output midi message
         ])
       }
     }
@@ -55,8 +55,10 @@ class Launchpad extends EventEmitter {
 
   noteOn (note) {
     this.onNotes[note] = setInterval(() => {
-      console.log(note)
-      this.emit('recieved', [0, note % 5])
+      let x = note % 8;
+      let y = Math.floor(note / 8)
+
+      this.emit('recieved', [x, y])
     }, 50)
   }
 
